@@ -9,3 +9,8 @@ Enabling/Disabling wifi on raspberrypi 4
 - add `dtoverlay=pi3-disable-wifi` to the end of the file to disable wifi
 
 - reboot
+
+# Disable WiFi/Bluetooth
+
+dtoverlay=pi3-disable-wifi
+dtoverlay=pi3-disable-bt
