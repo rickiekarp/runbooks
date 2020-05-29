@@ -11,4 +11,4 @@ docker run -d \
     -p 2222:22 -p 10080:3000 \
     -e PUID=1001 -e PGID=1001 \
     -v gogs-data:/data \
-    gogs/gogs-rpi
+    gogs/gogs-rpi:0.11.91
