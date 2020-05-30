@@ -4,6 +4,10 @@
 
 rsync -rlvpt $HOME/git/secrets/raspberrypi/home/pi/ pi@192.168.178.200:~/
 
+2. Copy ssh key to pi
+
+ssh-copy-id pi@192.168.178.199
+
 2. SSH into pi and clone the infrastructure projects
 
 ssh pi@192.168.178.200
