@@ -8,7 +8,7 @@ docker run -d \
     -v /mnt/raid1/applications/cloud/apps:/var/www/html/custom_apps \
     -v /mnt/raid1/applications/cloud/config:/var/www/html/config \
     -v /mnt/raid1/applications/cloud/data:/var/www/html/data \
-    nextcloud:18.0.6
+    nextcloud:19.0.0
 
 ## Upgrade nextcloud
 
