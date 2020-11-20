@@ -22,3 +22,8 @@ Remove the old container:
 `docker rm cloud`
 
 Start a new nextcloud instance using the command in the `Start nextcloud` section.
+
+## Monitor upgrade
+
+Check the logs:
+`docker logs -f cloud`

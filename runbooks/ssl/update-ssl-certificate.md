@@ -16,4 +16,4 @@ To obtain a new or tweaked
    version of this certificate in the future, simply run certbot-auto again.
 
 To non-interactively renew *all* of your certificates, run
-   "certbot-auto renew"
+   "./certbot-auto renew"
