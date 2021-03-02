@@ -42,7 +42,7 @@ Consistency Policy : resync
        -       0        0        1      removed
 
 
-4. Reboot the machine and connect the new drive
+4. Remove the old drive, reboot the machine and connect the new drive
 
 pi@raspberrypi ~  $ lsblk
 NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
