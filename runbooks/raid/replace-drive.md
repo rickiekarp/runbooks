@@ -99,18 +99,24 @@ Consistency Policy : resync
 Resize the array to the new maximal size
 Now all the disks have been replaced with larger 3TB disk, but the raid device is not using the space yet. To instruct mdadm to use all the available space I issue the following commands:
 
-mdadm --grow /dev/md0 --bitmap none
-mdadm --grow /dev/md0 --size=max
+```
+sudo mdadm --grow /dev/md0 --bitmap none
+sudo mdadm --grow /dev/md0 --size=max
+```
 
 Now this also takes quite a while to complete – several hours in my case. The RAID is still usable while this is happening.
 
-
 ### Resize file system
-Finally I had to grow the filesystem to use the new available space on the array. My array is mounted under /home, so I have umount the filesystem first:
+Finally I had to grow the filesystem to use the new available space on the array. 
+My array is mounted under /mnt/raid1, so I have umount the filesystem first:
+```
 sudo umount /mnt/raid1
+```
 
 Stop cloud service (if /dev/md0 is in use):
+```
 docker stop cloud
+```
 
 To make sure everything is okay I force a check of the filesystem before the resizing:
 pi@raspberrypi:~ $ sudo e2fsck -f /dev/md0
@@ -123,7 +129,9 @@ Pass 5: Checking group summary information
 /dev/md0: 20991/3751936 files (3.2% non-contiguous), 7017356/15007488 blocks
 
 Start resizing:
+```
 sudo resize2fs -S 128 -p /dev/md0 3725G
+```
 
  -S raid stride size calculated with chunk / block = 512k / 4k = 128k. These are custom numbers that will not make sense with the default. Please find your numbers and use those for this. You can also just not call this option and stick to default.
 remember to set chunk in mdadm command, as chunk is set to 64? by default
