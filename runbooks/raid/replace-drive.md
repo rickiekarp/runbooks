@@ -3,17 +3,17 @@
 ### Remove drive from array
 
 1. Check status
-sudo mdadm --detail /dev/md0 
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0` 
 
 2. Remove drive
-pi@raspberrypi ~  $ sudo mdadm --manage /dev/md0 --fail /dev/sda1
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --fail /dev/sda1`
 mdadm: set /dev/sda1 faulty in /dev/md0
 
-pi@raspberrypi ~  $ sudo mdadm --manage /dev/md0 --remove /dev/sda1
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --remove /dev/sda1`
 mdadm: hot removed /dev/sda1 from /dev/md0
 
 3. Check status again
-pi@raspberrypi ~  $ sudo mdadm --detail /dev/md0 
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
 /dev/md0:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
@@ -44,7 +44,7 @@ Consistency Policy : resync
 
 4. Remove the old drive, reboot the machine and connect the new drive
 
-pi@raspberrypi ~  $ lsblk
+pi@raspberrypi ~  $ `lsblk`
 NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
 sda           8:0    0 931.5G  0 disk  
 └─sda1        8:1    0 931.5G  0 part  
@@ -60,10 +60,10 @@ mmcblk0     179:0    0  14.9G  0 disk
 
 ### Add new drive to array
 
-pi@raspberrypi ~  $ sudo mdadm --manage /dev/md0 --add /dev/sda1
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --add /dev/sda1`
 mdadm: added /dev/sda1
 
-pi@raspberrypi ~  $ sudo mdadm --detail /dev/md0 
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0 `
 /dev/md0:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
@@ -108,7 +108,7 @@ Now this also takes quite a while to complete – several hours in my case. The 
 
 ### Resize file system
 Finally I had to grow the filesystem to use the new available space on the array. 
-My array is mounted under /mnt/raid1, so I have umount the filesystem first:
+My array is mounted under /mnt/raid1, so I have to umount the filesystem first:
 ```
 sudo umount /mnt/raid1
 ```
@@ -119,7 +119,7 @@ docker stop cloud
 ```
 
 To make sure everything is okay I force a check of the filesystem before the resizing:
-pi@raspberrypi:~ $ sudo e2fsck -f /dev/md0
+pi@raspberrypi:~ $ `sudo e2fsck -f /dev/md0`
 e2fsck 1.44.5 (15-Dec-2018)
 Pass 1: Checking inodes, blocks, and sizes
 Pass 2: Checking directory structure
@@ -137,3 +137,8 @@ sudo resize2fs -S 128 -p /dev/md0 3725G
 remember to set chunk in mdadm command, as chunk is set to 64? by default
 higher chunk was decided upon based on info from raid wiki that research showed that high chunk size for raid-5 arrays worked good
 630G gigabytes shrink to size
+
+Finally, mount the filesystem again:
+```
+sudo mount /mnt/raid1
+```
