@@ -8,3 +8,6 @@ php occ versions:cleanup
 
 ## Clean up trash bin
 php occ trashbin:cleanup --all-users
+
+## The files:scan command scans for new files and updates the file cache
+php occ files:scan --all
