@@ -12,4 +12,4 @@ docker run -d \
     --name ocis \
     --env-file="operation/ocis/env" \
     -p 9200:9200 \
-    owncloud/ocis:1.5.0-linux-arm
+    owncloud/ocis:1.6.0-linux-arm
