@@ -1,6 +1,6 @@
 # README #
 
-## Start nextcloud
+## Start owncloud infinite scale
 
 docker run -d \
     --name ocis \
@@ -9,4 +9,4 @@ docker run -d \
     --add-host=ocis.rickiekarp.net:172.17.0.1 \
     -v /mnt/raid1/applications/owncloud/config:/config \
     -v /mnt/raid1/applications/owncloud/ocis:/var/tmp/ocis \
-    owncloud/ocis:1.6.0-linux-arm
+    owncloud/ocis:1.7.0-linux-arm
