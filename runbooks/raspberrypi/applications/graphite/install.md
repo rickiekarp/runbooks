@@ -7,6 +7,7 @@ docker run -d \
  -p 2003:2003 \
  -p 8125:8125/udp \
  -v /mnt/raid1/applications/graphite/storage/whisper:/opt/graphite/storage/whisper \
+ -v /mnt/raid1/applications/graphite/conf:/opt/graphite/conf \
  graphiteapp/graphite-statsd:1.1.8-1
 
 
