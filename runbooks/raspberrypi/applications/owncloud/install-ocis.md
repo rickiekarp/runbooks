@@ -9,12 +9,12 @@ docker run -d \
     --add-host=ocis.rickiekarp.net:172.17.0.1 \
     -v /mnt/raid1/applications/owncloud/config:/config \
     -v /mnt/raid1/applications/owncloud/ocis:/var/tmp/ocis \
-    owncloud/ocis:1.8.0-linux-arm
+    owncloud/ocis:1.9.0-linux-arm
 
 ## Upgrade owncloud
 
 Pull the latest owncloud version:
-`docker pull owncloud/ocis:1.8.0-linux-arm`
+`docker pull owncloud/ocis:1.9.0-linux-arm`
 
 Stop the running owncloud instance:
 `docker stop ocis`
