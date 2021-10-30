@@ -7,12 +7,12 @@ docker run -d \
     --env-file="operation/ocis/env" \
     -p 9200:9200 \
     --add-host=ocis.rickiekarp.net:172.17.0.1 \
-    owncloud/ocis:1.11.0-linux-arm
+    owncloud/ocis:1.14.0-linux-arm
 
 ## Upgrade owncloud
 
 Pull the latest owncloud version:
-`docker pull owncloud/ocis:1.11.0-linux-arm`
+`docker pull owncloud/ocis:1.14.0-linux-arm`
 
 Stop the running owncloud instance:
 `docker stop ocis`
