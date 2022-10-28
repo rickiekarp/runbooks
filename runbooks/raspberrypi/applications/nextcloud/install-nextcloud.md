@@ -8,12 +8,12 @@ docker run -d \
     -v /mnt/raid1/applications/cloud/apps:/var/www/html/custom_apps \
     -v /mnt/raid1/applications/cloud/config:/var/www/html/config \
     -v /mnt/raid1/applications/cloud/data:/var/www/html/data \
-    nextcloud:24.0.6
+    nextcloud:25.0.0
 
 ## Upgrade nextcloud
 
 Pull the latest nextcloud version:
-`docker pull nextcloud:24.0.6`
+`docker pull nextcloud:25.0.0`
 
 Stop the running nextcloud instance:
 `docker stop cloud`
