@@ -23,12 +23,12 @@ docker run -d \
     -p 2222:22 -p 10080:3000 \
     -e PUID=1001 -e PGID=1001 \
     -v gogs-data:/data \
-    gogs/gogs-rpi:0.12.3
+    gogs/gogs:0.12.10
 
-## Upgrade nextcloud
+## Upgrade gogs
 
 Pull the latest nextcloud version:
-`docker pull gogs/gogs-rpi:0.12.3`
+`docker pull gogs/gogs:0.12.10`
 
 Stop the running gogs instance:
 `docker stop gogs`
