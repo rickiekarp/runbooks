@@ -1,6 +1,6 @@
 # README #
 
-Installing gogs on raspberry pi
+Installing gogs on raspberry pi 4
 
 # Create docker volume.
 $ docker volume create --name gogs-data
@@ -27,7 +27,7 @@ docker run -d \
 
 ## Upgrade gogs
 
-Pull the latest nextcloud version:
+Pull the latest gogs version:
 `docker pull gogs/gogs:0.12.10`
 
 Stop the running gogs instance:
