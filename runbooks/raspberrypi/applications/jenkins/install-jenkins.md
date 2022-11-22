@@ -6,12 +6,12 @@ docker run -d \
     -p 8081:8080 \
     -p 50000:50000 \
     -v jenkins_home:/var/jenkins_home \
-    jenkins4eval/jenkins:2.289-slim
+    jenkins/jenkins:2.379-jdk11
 
 ## Upgrade jenkins
 
 Pull the latest jenkins version:
-`docker pull jenkins4eval/jenkins:2.289-slim`
+`docker pull jenkins/jenkins:2.379-jdk11`
 
 Stop the running jenkins instance:
 `docker stop jenkins`
