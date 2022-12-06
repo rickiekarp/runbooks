@@ -1,18 +1,25 @@
 # README #
 
+## Initialize owncloud infinite scale
+
+docker run --rm -it -u root -v /mnt/raid1/applications/owncloud/config:/etc/ocis owncloud/ocis:2.0.0-linux-arm init
+
 ## Start owncloud infinite scale
 
 docker run -d \
     --name ocis \
+    -u root \
     --env-file="operation/ocis/env" \
+    -v /mnt/raid1/applications/owncloud/config:/etc/ocis \
+    -v /mnt/raid1/applications/owncloud/data:/var/lib/ocis \
     -p 9200:9200 \
     --add-host=ocis.rickiekarp.net:172.17.0.1 \
-    owncloud/ocis:1.18.0-linux-arm
+    owncloud/ocis:2.0.0-linux-arm
 
 ## Upgrade owncloud
 
 Pull the latest owncloud version:
-`docker pull owncloud/ocis:1.18.0-linux-arm`
+`docker pull owncloud/ocis:2.0.0-linux-arm`
 
 Stop the running owncloud instance:
 `docker stop ocis`
