@@ -63,7 +63,7 @@ mmcblk0     179:0    0  14.9G  0 disk
 pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --add /dev/sda1`
 mdadm: added /dev/sda1
 
-pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0 `
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
 /dev/md0:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
