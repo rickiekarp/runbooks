@@ -23,12 +23,12 @@ docker run -d \
     -p 2222:22 -p 10080:3000 \
     -e PUID=1001 -e PGID=1001 \
     -v gogs-data:/data \
-    gogs/gogs:0.12.11
+    gogs/gogs:0.13.0
 
 ## Upgrade gogs
 
 Pull the latest gogs version:
-`docker pull gogs/gogs:0.12.11`
+`docker pull gogs/gogs:0.13.0`
 
 Stop the running gogs instance:
 `docker stop gogs`
