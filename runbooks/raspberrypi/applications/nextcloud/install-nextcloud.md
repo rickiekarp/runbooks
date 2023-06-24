@@ -4,16 +4,16 @@
 docker run -d \
     --name cloud \
     -p 8888:80 \
-    -v /mnt/raid1/applications/cloud/nextcloud:/var/www/html \
-    -v /mnt/raid1/applications/cloud/apps:/var/www/html/custom_apps \
-    -v /mnt/raid1/applications/cloud/config:/var/www/html/config \
-    -v /mnt/raid1/applications/cloud/data:/var/www/html/data \
-    nextcloud:26.0.1-apache
+    -v /mnt/raid2/applications/cloud/nextcloud:/var/www/html \
+    -v /mnt/raid2/applications/cloud/apps:/var/www/html/custom_apps \
+    -v /mnt/raid2/applications/cloud/config:/var/www/html/config \
+    -v /mnt/raid2/applications/cloud/data:/var/www/html/data \
+    nextcloud:27.0.0-apache
 
 ## Upgrade nextcloud
 
 Pull the latest nextcloud version:
-`docker pull nextcloud:26.0.1-apache`
+`docker pull nextcloud:27.0.0-apache`
 
 Stop the running nextcloud instance:
 `docker stop cloud`
