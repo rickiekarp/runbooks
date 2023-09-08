@@ -8,7 +8,7 @@ docker run -d \
  -p 8125:8125/udp \
  -v /mnt/raid1/applications/graphite/storage/whisper:/opt/graphite/storage/whisper \
  -v /mnt/raid1/applications/graphite/conf:/opt/graphite/conf \
- graphiteapp/graphite-statsd:1.1.10-4
+ graphiteapp/graphite-statsd:1.1.10-5
 
 
 ### Mapped Ports
