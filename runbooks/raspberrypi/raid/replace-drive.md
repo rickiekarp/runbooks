@@ -17,7 +17,7 @@ pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
 /dev/md0:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
-        Raid Level : raid1
+        Raid Level : raid2
         Array Size : 60029952 (57.25 GiB 61.47 GB)
      Used Dev Size : 60029952 (57.25 GiB 61.47 GB)
       Raid Devices : 2
@@ -49,7 +49,7 @@ NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
 sda           8:0    0 931.5G  0 disk  
 └─sda1        8:1    0 931.5G  0 part  
 sdb           8:16   0 931.5G  0 disk  
-└─md0         9:0    0  57.3G  0 raid1 /mnt/raid1
+└─md0         9:0    0  57.3G  0 raid2 /mnt/raid2
 mmcblk0     179:0    0  14.9G  0 disk  
 ├─mmcblk0p1 179:1    0    63M  0 part  
 ├─mmcblk0p2 179:2    0     1K  0 part  
@@ -67,7 +67,7 @@ pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
 /dev/md0:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
-        Raid Level : raid1
+        Raid Level : raid2
         Array Size : 60029952 (57.25 GiB 61.47 GB)
      Used Dev Size : 60029952 (57.25 GiB 61.47 GB)
       Raid Devices : 2
@@ -108,9 +108,9 @@ Now this also takes quite a while to complete – several hours in my case. The 
 
 ### Resize file system
 Finally I had to grow the filesystem to use the new available space on the array. 
-My array is mounted under /mnt/raid1, so I have to umount the filesystem first:
+My array is mounted under /mnt/raid2, so I have to umount the filesystem first:
 ```
-sudo umount /mnt/raid1
+sudo umount /mnt/raid2
 ```
 
 Stop cloud service (if /dev/md0 is in use):
@@ -140,5 +140,5 @@ higher chunk was decided upon based on info from raid wiki that research showed 
 
 Finally, mount the filesystem again:
 ```
-sudo mount /mnt/raid1
+sudo mount /mnt/raid2
 ```

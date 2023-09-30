@@ -13,16 +13,16 @@ ssh git@pi
 
 sudo mkdir -p /home/git
 cd /home/git
-sudo ln -s /mnt/raid1/applications/gogs/git/.ssh .ssh
+sudo ln -s /mnt/raid2/applications/gogs/git/.ssh .ssh
 sudo chown -h git:git .ssh
-sudo chmod 775 /mnt/raid1/applications/gogs
+sudo chmod 775 /mnt/raid2/applications/gogs
 
 # Start gogs
 docker run -d \
     --name gogs \
     -p 2222:22 -p 10080:3000 \
     -e PUID=1001 -e PGID=1001 \
-    -v /mnt/raid1/applications/gogs:/data \
+    -v /mnt/raid2/applications/gogs:/data \
     gogs/gogs:0.13.0
 
 ## Upgrade gogs

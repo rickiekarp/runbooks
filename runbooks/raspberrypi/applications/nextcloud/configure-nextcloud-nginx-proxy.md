@@ -3,7 +3,7 @@
 ### Issue: Nextcloud redirects to localhost
 
 Solution:
-Open the config.php (/mnt/raid1/applications/cloud/config/config.php) and add:
+Open the config.php (/mnt/raid2/applications/cloud/config/config.php) and add:
 
 ```
 'overwritehost' => 'cloud.rickiekarp.net',

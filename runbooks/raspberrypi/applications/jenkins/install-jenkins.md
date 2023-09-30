@@ -5,7 +5,7 @@ docker run -d \
     --name jenkins \
     -p 8081:8080 \
     -p 50000:50000 \
-    -v /mnt/raid1/applications/jenkins:/var/jenkins_home \
+    -v /mnt/raid2/applications/jenkins:/var/jenkins_home \
     jenkins/jenkins:2.401-jdk17
 
 ## Upgrade jenkins
