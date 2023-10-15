@@ -1,6 +1,6 @@
 # README #
 
-Creating a luks keyfile volume
+## Creating a luks keyfile volume
 
 # Install the "uuid" tool
 sudo apt install uuid
@@ -59,3 +59,7 @@ sudo mv luksunlockusb /bin/luksunlockusb
 sudo update-initramfs -u
 reboot
 ```
+
+## Set up configuration to unlock keyring automatically
+
+Extract the `keyring.tar.xz` config from the Password Manager `hosts` to the users home directory.
