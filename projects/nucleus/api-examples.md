@@ -1,3 +1,17 @@
+
+Send message to single client
+```
+curl -X POST --header "X-Recipient-Client: test" localhost:12000/v1/send
+```
+
+
+Broadcast message to all clients
+```
+curl -X POST -d "data" localhost:12000/v1/broadcast
+```
+
+Concept:
+
 1. 
 
 {
