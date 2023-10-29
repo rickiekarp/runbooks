@@ -13,7 +13,7 @@ docker run -d \
     -v /mnt/raid2/applications/owncloud/config:/etc/ocis \
     -v /mnt/raid2/applications/owncloud/data:/var/lib/ocis \
     -p 9200:9200 \
-    --add-host=ocis.rickiekarp.net:172.17.0.2 \
+    --add-host=ocis.rickiekarp.net:172.17.0.1 \
     owncloud/ocis:2.0.0-linux-arm64
 
 ## Upgrade owncloud
