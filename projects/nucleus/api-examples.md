@@ -12,7 +12,7 @@ curl -X POST -d "data" localhost:12000/v1/broadcast
 
 Update preferences
 ```
-curl -v -X PATCH localhost:12000/preferences
+curl -v -X PATCH localhost:12000/preferences -d '{"event":"preferences_changed","data": {"minClientVersion": "123"}}'
 ```
 
 Concept:
