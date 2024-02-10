@@ -3,18 +3,18 @@
 ### Remove drive from array
 
 1. Check status
-pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0` 
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md1` 
 
 2. Remove drive
-pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --fail /dev/sda1`
-mdadm: set /dev/sda1 faulty in /dev/md0
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md1 --fail /dev/sda1`
+mdadm: set /dev/sda1 faulty in /dev/md1
 
-pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --remove /dev/sda1`
-mdadm: hot removed /dev/sda1 from /dev/md0
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md1 --remove /dev/sda1`
+mdadm: hot removed /dev/sda1 from /dev/md1
 
 3. Check status again
-pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
-/dev/md0:
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md1`
+/dev/md1:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
         Raid Level : raid2
@@ -42,14 +42,14 @@ Consistency Policy : resync
        -       0        0        1      removed
 
 
-4. Remove the old drive, reboot the machine and connect the new drive
+4. Remove the old drive and connect the new drive
 
 pi@raspberrypi ~  $ `lsblk`
 NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
 sda           8:0    0 931.5G  0 disk  
 └─sda1        8:1    0 931.5G  0 part  
 sdb           8:16   0 931.5G  0 disk  
-└─md0         9:0    0  57.3G  0 raid2 /mnt/raid2
+└─md1         9:0    0  57.3G  0 raid2 /mnt/raid2
 mmcblk0     179:0    0  14.9G  0 disk  
 ├─mmcblk0p1 179:1    0    63M  0 part  
 ├─mmcblk0p2 179:2    0     1K  0 part  
@@ -60,11 +60,11 @@ mmcblk0     179:0    0  14.9G  0 disk
 
 ### Add new drive to array
 
-pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md0 --add /dev/sda1`
+pi@raspberrypi ~  $ `sudo mdadm --manage /dev/md1 --add /dev/sda1`
 mdadm: added /dev/sda1
 
-pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md0`
-/dev/md0:
+pi@raspberrypi ~  $ `sudo mdadm --detail /dev/md1`
+/dev/md1:
            Version : 1.2
      Creation Time : Thu May 23 16:01:31 2019
         Raid Level : raid2
@@ -97,11 +97,11 @@ Consistency Policy : resync
 ### Resize array
 
 Resize the array to the new maximal size
-Now all the disks have been replaced with larger 3TB disk, but the raid device is not using the space yet. To instruct mdadm to use all the available space I issue the following commands:
+Now all the disks have been replaced with larger disk, but the raid device is not using the space yet. To instruct mdadm to use all the available space I issue the following commands:
 
 ```
-sudo mdadm --grow /dev/md0 --bitmap none
-sudo mdadm --grow /dev/md0 --size=max
+sudo mdadm --grow /dev/md1 --bitmap none
+sudo mdadm --grow /dev/md1 --size=max
 ```
 
 Now this also takes quite a while to complete – several hours in my case. The RAID is still usable while this is happening.
@@ -113,24 +113,29 @@ My array is mounted under /mnt/raid2, so I have to umount the filesystem first:
 sudo umount /mnt/raid2
 ```
 
-Stop cloud service (if /dev/md0 is in use):
+Stop cloud service (if /dev/md1 is in use):
 ```
 docker stop cloud
 ```
 
 To make sure everything is okay I force a check of the filesystem before the resizing:
-pi@raspberrypi:~ $ `sudo e2fsck -f /dev/md0`
+pi@raspberrypi:~ $ `sudo e2fsck -f /dev/md1`
 e2fsck 1.44.5 (15-Dec-2018)
 Pass 1: Checking inodes, blocks, and sizes
 Pass 2: Checking directory structure
 Pass 3: Checking directory connectivity
 Pass 4: Checking reference counts
 Pass 5: Checking group summary information
-/dev/md0: 20991/3751936 files (3.2% non-contiguous), 7017356/15007488 blocks
+/dev/md1: 20991/3751936 files (3.2% non-contiguous), 7017356/15007488 blocks
+
+Get new max space size in GB
+```
+lsblk -bo +uuid,name -P | awk '$1 !~ /nvme0/ {$4=sprintf("SIZE=\"%.0fG\"", substr($4,7,length($4)-7)/1024**3); print}'
+```
 
 Start resizing:
 ```
-sudo resize2fs -S 128 -p /dev/md0 3725G
+sudo resize2fs -S 128 -p /dev/md1 4657G
 ```
 
  -S raid stride size calculated with chunk / block = 512k / 4k = 128k. These are custom numbers that will not make sense with the default. Please find your numbers and use those for this. You can also just not call this option and stick to default.
