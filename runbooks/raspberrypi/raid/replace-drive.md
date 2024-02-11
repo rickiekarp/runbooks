@@ -108,15 +108,6 @@ Now this also takes quite a while to complete – several hours in my case. The 
 
 ### Resize file system
 Finally I had to grow the filesystem to use the new available space on the array. 
-My array is mounted under /mnt/raid2, so I have to umount the filesystem first:
-```
-sudo umount /mnt/raid2
-```
-
-Stop cloud service (if /dev/md1 is in use):
-```
-docker stop cloud
-```
 
 To make sure everything is okay I force a check of the filesystem before the resizing:
 pi@raspberrypi:~ $ `sudo e2fsck -f /dev/md1`
@@ -128,22 +119,24 @@ Pass 4: Checking reference counts
 Pass 5: Checking group summary information
 /dev/md1: 20991/3751936 files (3.2% non-contiguous), 7017356/15007488 blocks
 
-Get new max space size in GB
-```
-lsblk -bo +uuid,name -P | awk '$1 !~ /nvme0/ {$4=sprintf("SIZE=\"%.0fG\"", substr($4,7,length($4)-7)/1024**3); print}'
-```
-
 Start resizing:
 ```
-sudo resize2fs -S 128 -p /dev/md1 4657G
+sudo cryptsetup resize /dev/mapper/secure
+sudo resize2fs /dev/mapper/secure
 ```
 
- -S raid stride size calculated with chunk / block = 512k / 4k = 128k. These are custom numbers that will not make sense with the default. Please find your numbers and use those for this. You can also just not call this option and stick to default.
-remember to set chunk in mdadm command, as chunk is set to 64? by default
-higher chunk was decided upon based on info from raid wiki that research showed that high chunk size for raid-5 arrays worked good
-630G gigabytes shrink to size
-
-Finally, mount the filesystem again:
+Output:
 ```
-sudo mount /mnt/raid2
+pi@raspberrypi:~ $ sudo resize2fs /dev/mapper/secure
+resize2fs 1.47.0 (5-Feb-2023)
+Filesystem at /dev/mapper/secure is mounted on /mnt/raid2; on-line resizing required
+old_desc_blocks = 233, new_desc_blocks = 583
+The filesystem on /dev/mapper/secure is now 1220902624 (4k) blocks long.
+```
+
+Once the resizing is done, we can check the size of the new raid:
+```
+pi@raspberrypi:~ $ df -h
+Filesystem          Size  Used Avail Use% Mounted on
+/dev/mapper/secure  4.5T  1.7T  2.7T  38% /mnt/raid2
 ```
