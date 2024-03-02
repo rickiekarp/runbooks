@@ -22,7 +22,10 @@ docker run -d \
     --name gogs \
     -p 2222:22 -p 10080:3000 \
     -e PUID=1001 -e PGID=1001 \
-    -v /mnt/raid2/applications/gogs:/data \
+    -v /mnt/raid2/applications/gogs/git:/data/git \
+    -v /mnt/raid2/nodes/raspberrypi/configs/gogs/conf:/data/gogs/conf \
+    -v /mnt/raid2/applications/gogs/gogs/data:/data/gogs/data \
+    -v /mnt/raid2/applications/gogs/ssh:/data/ssh \
     gogs/gogs:0.13.0
 
 ## Upgrade gogs

@@ -6,7 +6,7 @@ docker run -d \
     -p 8888:80 \
     -v /mnt/raid2/applications/cloud/nextcloud:/var/www/html \
     -v /mnt/raid2/applications/cloud/apps:/var/www/html/custom_apps \
-    -v /mnt/raid2/applications/cloud/config:/var/www/html/config \
+    -v /mnt/raid2/nodes/raspberrypi/configs/nextcloud/config:/var/www/html/config \
     -v /mnt/raid2/applications/cloud/data:/var/www/html/data \
     nextcloud:28.0.2-apache
 
