@@ -6,5 +6,5 @@
 ## Configure Git to use auth token
 git config \
   --global \
-  url."https://${user}:${personal_access_token}@git.rickiekarp.net".insteadOf \
-  "https://git.rickiekarp.net"
+  url."http://${user}:${personal_access_token}@git.rickiekarp.net".insteadOf \
+  "http://git.rickiekarp.net"
