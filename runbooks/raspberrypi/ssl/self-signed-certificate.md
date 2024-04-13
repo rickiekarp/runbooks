@@ -3,7 +3,15 @@
 
 Execute:
 ```
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/nginx-selfsigned.key \
+    -out /etc/ssl/certs/nginx-selfsigned.crt \
+    -addext "subjectAltName=DNS:rickiekarp.net,DNS:*.rickiekarp.net"
+```
+
+Copy to ca-certs:
+```
+sudo cp /etc/ssl/certs/nginx-selfsigned.crt /usr/share/ca-certificates/
 ```
 
 And follow the instructions on the screen.
@@ -14,7 +22,10 @@ And follow the instructions on the screen.
 Step 1: Create the SSL Certificate
 
 ```
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/nginx-selfsigned.key \
+    -out /etc/ssl/certs/nginx-selfsigned.crt \
+    -addext "subjectAltName=DNS:rickiekarp.net,DNS:*.rickiekarp.net"
 ```
 
 Fill out the prompts appropriately. The most important line is the one that requests the Common Name (e.g. server FQDN or YOUR name). You need to enter the domain name associated with your server or, more likely, your server’s public IP address.
