@@ -1,5 +1,0 @@
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-# Project6
-* * * * *   rickie    cd /home/rickie/Programs/Dev/project6 && bash update-checker.sh
