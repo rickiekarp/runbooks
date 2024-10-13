@@ -4,6 +4,7 @@
 docker run -d \
     --name cloud \
     -p 8888:80 \
+    --add-host=cloud.rickiekarp.net:172.17.0.1 \
     -v /mnt/raid2/applications/cloud/nextcloud:/var/www/html \
     -v /mnt/raid2/applications/cloud/apps:/var/www/html/custom_apps \
     -v /mnt/raid2/nodes/raspberrypi/configs/nextcloud/config:/var/www/html/config \
