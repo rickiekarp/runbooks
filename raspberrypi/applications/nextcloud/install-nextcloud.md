@@ -9,12 +9,12 @@ docker run -d \
     -v /mnt/raid2/applications/cloud/apps:/var/www/html/custom_apps \
     -v /mnt/raid2/nodes/raspberrypi/configs/nextcloud/config:/var/www/html/config \
     -v /mnt/raid2/applications/cloud/data:/var/www/html/data \
-    nextcloud:30.0.0-apache
+    nextcloud:30.0.1-apache
 
 ## Upgrade nextcloud
 
 Pull the latest nextcloud version:
-`docker pull nextcloud:30.0.0-apache`
+`docker pull nextcloud:30.0.1-apache`
 
 Stop the running nextcloud instance:
 `docker stop cloud`
